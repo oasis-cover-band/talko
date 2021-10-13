@@ -15,10 +15,12 @@
     app-search-bar {
         grid-area:content;
     }
-    app-landing {
-        pointer-events: none;
+    app-notifier {
         grid-area:content;
-        z-index:2;
+        align-self:end;
+        justify-self:center;
+        z-index:10;
+        pointer-events: none;
     }
     section.content {
         pointer-events: none;
@@ -31,39 +33,17 @@
         grid-template-areas: 'content';
         grid-template-columns: 1fr;
         grid-template-rows: 1fr;
-    }
-    app-notifier {
-        grid-area:content;
-        align-self:end;
-        justify-self:center;
-        z-index:10;
-        pointer-events: none;
-    }
-    section.content {
         z-index:1;
-        grid-template-areas:
-        '. . . .'
-        '. menu main .'
-        '. . . .';
-        grid-template-columns: 10vw max-content 1fr 10vw;
-        grid-template-rows: 10vh 1fr 10vh;
-        column-gap:10px;
         justify-items: center;
         justify-content: center;
-        align-items: center;
-        align-content: center;
+        align-items: start;
+        align-content: start;
         overflow: hidden;
-        app-menu {
-            pointer-events: visible;
-            grid-area:menu;
-            align-self: center;
-            border-right: 5px solid $white;
-        }
         main {
             justify-self:stretch;
             align-self:stretch;
             // pointer-events: none!important;
-            grid-area: main;
+            grid-area: content;
             grid-template-areas: 'router-outlet';
             grid-template-columns: 1fr;
             grid-template-rows: 1fr;
@@ -74,6 +54,16 @@
             overflow:hidden;
             min-height:75vh;
             overflow-y:scroll;
+            router-outlet {
+                grid-area: router-outlet;
+            }
+            router-outlet ~ * {
+                grid-area: router-outlet;
+            }
+        }
+        app-logo {
+            grid-area:content;
+            z-index:-1;
         }
     }
 }

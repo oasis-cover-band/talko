@@ -1,1 +1,3 @@
-<p>search-bar works!</p>
+<span class="fake-input" *ngIf="(this.searchHidden | async) === false" [@fadeDownAnimations]>
+    <input #inputElement [placeholder]="placeholderText" (keyup)="alertSiteService($event)"/>
+</span>

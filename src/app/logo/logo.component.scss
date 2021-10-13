@@ -1,0 +1,65 @@
+@import '../colors.scss';
+
+:host {
+    // grid-area: logo; // set outside
+    display:grid;
+    grid-template-areas:
+    'logo-text'
+    'logo-image';
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content min-content;
+    justify-self: center;
+    align-self: center;
+    justify-items: center;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    h1 {
+        grid-area:logo-text;
+        justify-self: center;
+        align-self: end;
+        color: $primary;
+        pointer-events: none;
+        b {
+            color: $secondary;
+            animation: flashB 1.618s infinite;
+            animation-delay: 5 * 1.1618s;
+            @keyframes flashB {
+                16.18% {
+                    color:$white;
+                }
+            }
+        }
+        span {
+            pointer-events: all;
+            transition:0.4s;
+            font-size:10rem;
+            animation: flash 1.618s infinite;
+            $n: 10;
+
+            @for $i from 1 through $n {
+            &:nth-of-type(#{$i}) {
+                // animation-duration: $i * 1.618s;
+                animation-delay: $i * 1.1618s;
+            }
+            }
+            @keyframes flash {
+                16.18% {
+                    color:$tertiary;
+                }
+            }
+            &:hover {
+                filter: hue-rotate(-90deg);
+            }
+        }
+    }
+    img.logo {
+        grid-area:logo-image;
+        z-index:-1;
+        object-fit: contain;
+        justify-self: center;
+        align-self: start;
+        max-width:25vw;
+        max-height:25vh;
+    }
+}

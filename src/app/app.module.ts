@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SearchBarModule } from './search-bar/search-bar.module';
+import { LogoModule } from './logo/logo.module';
 
 @NgModule({
   declarations: [
@@ -12,7 +13,8 @@ import { SearchBarModule } from './search-bar/search-bar.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    SearchBarModule
+    SearchBarModule,
+    LogoModule
   ],
   providers: [],
   bootstrap: [AppComponent]

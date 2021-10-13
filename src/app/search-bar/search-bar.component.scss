@@ -1,0 +1,24 @@
+@import '../colors.scss';
+:host {
+    min-width:100%;
+    display:grid;
+    grid-template-areas:
+    'fake-input';
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    align-self:start;
+    justify-self:stretch;
+    align-items: start;
+    align-content: start;
+    justify-content: stretch;
+    justify-items: stretch;
+    z-index:1000;
+    height:fit-content;
+    span.fake-input {
+        grid-area:fake-input;
+        background:$white;
+        input {
+            pointer-events: visible;
+        }
+    }
+}
