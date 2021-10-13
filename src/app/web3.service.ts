@@ -19,6 +19,7 @@ export class Web3Service {
   contract!: any; // EMPTY CONTRACT OBJECT (INITIALIZED WITH ADDRESS, ONCE USER IS CONNECTED)
   // ****************   USER VARIABLES   *********************** //
   userAddress: BehaviorSubject<string | 0> = new BehaviorSubject<string | 0>(0); // (WHAT IS THIS USER'S ADDRESS?) - VALUE IS 0 IF USER ADDRESS IS UNSET
+  approvedAddress: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false); // (IS THIS ADDRESS ALLOWED TO USE THE APP?) - VALUE IS 0. WILL PULL FROM SMART CONTRACT. CURRENTLY PULLS FROM JSON FILE LOCALLY.
   chainId: BehaviorSubject<any> = new BehaviorSubject(0); // (WHICH BLOCKCHAIN IS THIS USER ON?)
   // ****************  END OF VARIABLES  *********************** //
   constructor() {
@@ -65,13 +66,21 @@ export class Web3Service {
       // Updating of address will be handled elsewhere.
         this.web3.eth.defaultAccount = await allUsersAddresses[0];
         await this.userAddress.next(allUsersAddresses[0]);
-        await this.web3.eth.getChainId().then(async result => {
-          this.chainId.next(await result);
-        });
+        await this.getChainId();
     });
     if (this.listeningForAccountChanges.getValue() === false) {
       await this.listenForAccountChanges();
     }
+  }
+
+  async checkIfAddressCanUseApp(): Promise<any> {
+    // do and call after request account or within?
+  }
+  
+  async getChainId(): Promise<any> {
+    await this.web3.eth.getChainId().then(async result => {
+      this.chainId.next(await result);
+    });
   }
 
   async listenForAccountChanges(): Promise<any> {
@@ -79,9 +88,7 @@ export class Web3Service {
       window.ethereum.on('accountsChanged', async (allUsersAddresses: any) => {
         this.web3.eth.defaultAccount = await allUsersAddresses[0];
         await this.userAddress.next(allUsersAddresses[0]);
-        await this.web3.eth.getChainId().then(async result => {
-          await this.chainId.next(result);
-        });
+        await this.getChainId();
       });
     } else {
        return;

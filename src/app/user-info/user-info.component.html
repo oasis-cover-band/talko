@@ -1,6 +1,45 @@
 <section class="user-info-container">
     <span class="user-details">
         <h6>logged in as</h6>
-        <h5>{{(userAddress | async)}}</h5>
+        <h5 class="long">{{(userAddress | async)}}</h5>
+    </span>
+    <span class="user-details">
+        <h6>current chain</h6>
+        <h5 class="long" *ngIf="(chainId | async) as chainId">
+            
+            <ng-container *ngIf="chainId === 1">
+                Mainnet
+            </ng-container>
+            <ng-container *ngIf="chainId === 3">
+                Ropsten
+            </ng-container>
+            <ng-container *ngIf="chainId === 4">
+                Rinkeby
+            </ng-container>
+            <ng-container *ngIf="chainId === 5">
+                Goerli
+            </ng-container>
+            <ng-container *ngIf="chainId === 42">
+                Kovan
+            </ng-container>
+        
+        </h5>
+    </span>
+    <span class="user-details">
+        <h6>approved to use</h6>
+        <h5 class="long" *ngIf="(approvedAddress | async) as approvedAddress">
+
+            <ng-container *ngIf="approvedAddress === true">
+                <img class="yes icon" src="../../assets/icons/yes.png"/>
+            </ng-container>
+        
+        </h5>
+        <h5 class="long" *ngIf="!(approvedAddress | async) as approvedAddress">
+
+            <ng-container>
+                <img class="no icon" src="../../assets/icons/no.png"/>
+            </ng-container>
+        
+        </h5>
     </span>
 </section>

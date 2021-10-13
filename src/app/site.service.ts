@@ -15,6 +15,9 @@ export class SiteService {
   searchMinimized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   userAddress: BehaviorSubject<string | 0> = this.web3Service.userAddress;
+  approvedAddress: BehaviorSubject<boolean> = this.web3Service.approvedAddress;
+  chainId: BehaviorSubject<number> = this.web3Service.chainId;
+
   constructor(
     private web3Service: Web3Service
   ) {

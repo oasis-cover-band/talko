@@ -1,3 +1,78 @@
+@import '../colors.scss';
 :host {
-    
+    max-height: 20vh;
+    height:fit-content;
+    min-height: 0px;
+    max-width: 100%;
+    min-width: 100%;
+    grid-template-areas:
+    'user-info-container';
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr;
+    // overflow:hidden;
+    section.user-info-container {
+        align-self: end;
+        max-height: calc(100% - 20px);
+        height:fit-content;
+        min-height: calc(100% - 20px);
+        max-width: calc(100% - 20px);
+        min-width: calc(100% - 20px);
+        transform:translate(0px, -10px);
+        grid-area: user-info-container;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
+        grid-auto-rows: minmax(25px, 200px);
+        grid-auto-flow: row;
+        border:10px solid $white;
+        align-items: center;
+        justify-items: center;
+        align-content: center;
+        justify-content: center;
+        span.user-details {
+            max-height: calc(100% - 20px);
+            height:fit-content;
+            // min-height: calc(100% - 20px);
+            max-width: calc(100% - 20px);
+            min-width: calc(100% - 20px);
+            display:grid;
+            grid-template-areas:
+            'title'
+            'content';
+            grid-template-columns: 1fr;
+            grid-template-rows: min-content min-content;
+            row-gap:10px;
+            align-self: center;
+            justify-self: center;
+            h5, h6 {
+                max-height: 100%;
+                min-height: 100%;
+                max-width: 100%;
+                min-width: 100%;
+                text-overflow: ellipsis;
+                overflow:hidden;
+            }
+            h6 {
+                font-variant-caps: petite-caps;
+                font-family: 'Old School Adventures';
+                grid-area:title;
+                font-size:0.75rem;
+            }
+            h5 {
+                font-family: 'Old School Adventures';
+                grid-area:content;
+                font-size:1.5rem;
+                &.long {
+                    font-size:1rem;
+                }
+                img.icon {
+                    max-height:50px;
+                    min-height:50px;
+                    max-width:50px;
+                    min-width:50px;
+                    object-fit: contain;
+                }
+            }
+        }
+    }
 }
