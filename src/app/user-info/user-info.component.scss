@@ -11,39 +11,42 @@
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
     // overflow:hidden;
+    pointer-events: all;
     span.hover-message {
         transition: 0.4s;
         grid-area: user-info-container;
         font-family: 'Teeny Tiny Pixls';
         color:$black;
-        justify-self: center;
+        justify-self: start;
         align-self: start;
-        transform:translateY(-100%);
+        transform:translateX(25%) translateY(100%);
     }
     section.user-info-container {
         transition: 0.4s;
         overflow:hidden;
-        align-self: end;
+        align-self: center;
         justify-self: center;
-        max-height: calc(100% - 20px);
-        height:0px;
-        max-width: calc(100% - 20px);
-        min-width: calc(100% - 20px);
-        transform:translate(0px, -10px);
+        max-height: calc(100%);
+        max-width: calc(100%);
+        min-width: calc(100%);
         grid-area: user-info-container;
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(100px, 400px));
-        grid-auto-rows: minmax(25px, 200px);
+        grid-auto-rows: minmax(50px, 200px);
         grid-auto-flow: row;
-        border:10px solid $white;
         align-items: center;
         justify-items: end;
         align-content: center;
         justify-content: end;
         span.user-details {
+            background:#00000000;
+            background-size:0% 0%;
+            background-repeat: no-repeat;
+            background-position:50% 0%;
             max-height: calc(100% - 20px);
             // height:fit-content;
-            // min-height: calc(100% - 20px);
+            min-height: 0%;
+            height:100%;
             max-width: calc(100% - 20px);
             min-width: calc(100% - 20px);
             display:grid;
@@ -51,10 +54,17 @@
             'title'
             'content';
             grid-template-columns: 1fr;
-            grid-template-rows: 1fr min-content;
+            grid-template-rows: min-content min-content;
             row-gap:10px;
             align-self: center;
             justify-self: center;
+            align-items: center;
+            justify-items: center;
+            align-content: center;
+            justify-content: center;
+            h5, h6, img {
+                transition:0.4s;
+            }
             h5, h6 {
                 max-height: 100%;
                 min-height: 100%;
@@ -68,20 +78,20 @@
                 font-variant-caps: petite-caps;
                 font-family: 'Old School Adventures';
                 grid-area:title;
-                font-size:0.75rem;
+                font-size:0.0rem;
             }
             h5 {
                 font-family: 'Old School Adventures';
                 grid-area:content;
-                font-size:1rem;
+                font-size:0rem;
                 &.long {
-                    font-size:0.5rem;
+                    font-size:0.0rem;
                 }
                 img.icon {
-                    max-height:50px;
-                    min-height:50px;
-                    max-width:50px;
-                    min-width:50px;
+                    max-height:0px;
+                    min-height:0px;
+                    max-width:0px;
+                    min-width:0px;
                     object-fit: contain;
                 }
             }
@@ -90,14 +100,33 @@
     }
     &.show, &:hover, &:active {
         section.user-info-container {
+            // height:fit-content;
+            // min-height: calc(100% - 20px);
             height:fit-content;
-            min-height: calc(100% - 20px);
-            background:$black;
+            span.user-details {
+                background:#000000FF;
+                height:100%;
+                h6 {
+                    font-size:0.75rem;
+                }
+                h5 {
+                    font-size:1rem;
+                    &.long {
+                        font-size:0.5rem;
+                    }
+                    img.icon {
+                        max-height:50px;
+                        min-height:50px;
+                        max-width:50px;
+                        min-width:50px;
+                        object-fit: contain;
+                    }
+                }
+            }
         }
         span.hover-message {
             transform: translateY(200%);
             font-size:0rem;
-            pointer-events:none;
         }
     }
 }
