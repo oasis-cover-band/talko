@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SiteService } from '../site.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-logo',
@@ -7,7 +9,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LogoComponent implements OnInit {
 
-  constructor() { }
+  searchCriteria: BehaviorSubject<string> = this.siteService.searchCriteria;
+  constructor(
+    private siteService: SiteService
+  ) { }
 
   ngOnInit(): void {
   }

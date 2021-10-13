@@ -1,2 +1,12 @@
-<h1><span>T</span><span>A</span><span>L</span><span>K</span><span><b>0</b></span></h1>
-<img class="logo" src="../assets/logo.gif" />
+<section [ngClass]="{
+    'minimize': (this.searchCriteria | async) !== ''
+    }" 
+    class="logo-container">
+    <h5>search for rarities, bot listings - and more...</h5>
+    <h1 [ngClass]="{
+        'minimize': (this.searchCriteria | async) !== ''
+        }"><span>T</span><span>A</span><span>L</span><span>K</span><span><b>0</b></span></h1>
+        <img [ngClass]="{
+        'minimize': (this.searchCriteria | async) !== ''
+        }" class="logo" src="../assets/logo.gif" />
+</section>
