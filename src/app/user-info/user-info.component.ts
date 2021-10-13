@@ -9,7 +9,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class UserInfoComponent implements OnInit {
   
-  userAddress: BehaviorSubject<string | 0> = this.siteService.userAddress;
+  userAddress: BehaviorSubject<string> = this.siteService.userAddress;
   approvedAddress: BehaviorSubject<boolean> = this.siteService.approvedAddress;
   chainId: BehaviorSubject<number> = this.siteService.chainId;
 

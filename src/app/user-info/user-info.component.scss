@@ -11,11 +11,22 @@
     grid-template-rows: 1fr;
     grid-template-columns: 1fr;
     // overflow:hidden;
+    span.hover-message {
+        transition: 0.4s;
+        grid-area: user-info-container;
+        font-family: 'Teeny Tiny Pixls';
+        color:$black;
+        justify-self: center;
+        align-self: start;
+        transform:translateY(-100%);
+    }
     section.user-info-container {
+        transition: 0.4s;
+        overflow:hidden;
         align-self: end;
+        justify-self: center;
         max-height: calc(100% - 20px);
-        height:fit-content;
-        min-height: calc(100% - 20px);
+        height:0px;
         max-width: calc(100% - 20px);
         min-width: calc(100% - 20px);
         transform:translate(0px, -10px);
@@ -26,12 +37,12 @@
         grid-auto-flow: row;
         border:10px solid $white;
         align-items: center;
-        justify-items: center;
+        justify-items: end;
         align-content: center;
-        justify-content: center;
+        justify-content: end;
         span.user-details {
             max-height: calc(100% - 20px);
-            height:fit-content;
+            // height:fit-content;
             // min-height: calc(100% - 20px);
             max-width: calc(100% - 20px);
             min-width: calc(100% - 20px);
@@ -40,7 +51,7 @@
             'title'
             'content';
             grid-template-columns: 1fr;
-            grid-template-rows: min-content min-content;
+            grid-template-rows: 1fr min-content;
             row-gap:10px;
             align-self: center;
             justify-self: center;
@@ -53,6 +64,7 @@
                 overflow:hidden;
             }
             h6 {
+                align-self: start;
                 font-variant-caps: petite-caps;
                 font-family: 'Old School Adventures';
                 grid-area:title;
@@ -61,9 +73,9 @@
             h5 {
                 font-family: 'Old School Adventures';
                 grid-area:content;
-                font-size:1.5rem;
+                font-size:1rem;
                 &.long {
-                    font-size:1rem;
+                    font-size:0.5rem;
                 }
                 img.icon {
                     max-height:50px;
@@ -73,6 +85,19 @@
                     object-fit: contain;
                 }
             }
+        }
+        position:relative;
+    }
+    &.show, &:hover, &:active {
+        section.user-info-container {
+            height:fit-content;
+            min-height: calc(100% - 20px);
+            background:$black;
+        }
+        span.hover-message {
+            transform: translateY(200%);
+            font-size:0rem;
+            pointer-events:none;
         }
     }
 }

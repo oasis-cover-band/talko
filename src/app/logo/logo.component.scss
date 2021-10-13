@@ -29,19 +29,25 @@
         align-items: center;
         align-content: center;
         row-gap:5px;
+        h5, h1 {
+            display:grid;
+            justify-content: center;
+            align-content: start;
+            grid-auto-flow: column;
+        }
         h5 {
             grid-area:logo-sub-text;
             justify-self: center;
             align-self: end;
             color: $white;
             pointer-events: none;
-            font-size:0.75rem;
+            font-size:0.5rem;
         }
         h1 {
             grid-area:logo-text;
             justify-self: center;
             align-self: center;
-            color: $primary;
+            color: $tertiary;
             pointer-events: none;
             b {
                 color: $secondary;
@@ -56,19 +62,28 @@
             span {
                 pointer-events: all;
                 transition:0.4s;
-                font-size:10rem;
-                animation: flash 1.618s infinite;
+                font-size:5rem;
+                animation: flash 3 * 1.618s infinite;
+                animation-timing-function: linear;
                 $n: 10;
-    
+                &:nth-of-type(2) {
+                    animation-direction: alternate;
+                }
+                &:nth-of-type(3) {
+                    animation-direction: alternate-reverse;
+                }
+                &:nth-of-type(4) {
+                    animation-direction: reverse;
+                }
                 @for $i from 1 through $n {
                 &:nth-of-type(#{$i}) {
                     // animation-duration: $i * 1.618s;
-                    animation-delay: $i * 1.1618s;
+                    animation-delay: 3 * $i * 1.1618s;
                 }
                 }
                 @keyframes flash {
                     16.18% {
-                        color:$tertiary;
+                        color:$black;
                     }
                 }
                 &:hover {
@@ -82,12 +97,12 @@
             object-fit: contain;
             justify-self: center;
             align-self: start;
-            max-width:25vw;
-            max-height:25vh;
+            max-width:10vw;
+            max-height:10vh;
         }
-        transition:0.2s;
+        transition:1s ease-out;
         h1, img.logo {
-            transition:0.2s;
+            transition:0.4s;
         }
         &.minimize {
             transform:scale(0.2) translate(-200vw, 200vh);

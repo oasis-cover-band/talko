@@ -14,19 +14,21 @@ export class SiteService {
   searchHidden: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   searchMinimized: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  userAddress: BehaviorSubject<string | 0> = this.web3Service.userAddress;
+  userAddress: BehaviorSubject<string> = this.web3Service.userAddress;
   approvedAddress: BehaviorSubject<boolean> = this.web3Service.approvedAddress;
   chainId: BehaviorSubject<number> = this.web3Service.chainId;
 
   constructor(
     private web3Service: Web3Service
   ) {
-    this.animateFavIcon();
+    setTimeout(() => {
+      this.animateFavIcon();
+    }, 2500);
   }
 
   animateFavIcon() {
     setInterval(() => {
-      if (this.currentFavIconFrame <= this.favIconFrames) {
+      if (this.currentFavIconFrame < this.favIconFrames) {
         this.changeFavIcon();
         this.currentFavIconFrame++;
       } else {

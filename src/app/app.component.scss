@@ -22,6 +22,102 @@
         z-index:10;
         pointer-events: none;
     }
+    section.background {
+        z-index:-100;
+        max-height:100%;
+        min-height:100%;
+        max-width:100%;
+        min-width:100%;
+        grid-area:content;
+        display:grid;
+        grid-template-areas: 'background-item';
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr;
+        justify-self: stretch;
+        align-self: stretch;
+        justify-items: stretch;
+        justify-content: stretch;
+        align-items: end;
+        align-content: end;
+        span {
+            max-height:100%;
+            min-height:100%;
+            max-width:100%;
+            min-width:100%;
+            grid-template-areas: 'background-item';
+            grid-template-columns: 1fr;
+            grid-template-rows: 1fr;
+            justify-self: stretch;
+            align-self: stretch;
+            justify-items: stretch;
+            justify-content: stretch;
+            align-items: end;
+            align-content: end;
+            position:relative;
+            animation: parallaxScroll calc(3 * 3 * 3 * 3 * 3 * 3 * 16.18s) infinite linear;
+            &:nth-of-type(1) {
+                &:after {
+                    display: inline;
+                    content: '';
+                    position:relative;
+                    grid-area:background-item;
+                    filter:opacity(0.1);
+                    background: url('../assets/background/5.png');
+                    background-size:100% auto;
+                    background-attachment: fixed;
+                    background-repeat: repeat-x;
+                    background-position:0vw 100%;
+                }
+            }
+            grid-area:background-item;
+            &:nth-of-type(2) {
+                filter:opacity(0.5);
+                background: url('../assets/background/4.png');
+                background-size:100% auto;
+                background-attachment: fixed;
+                background-repeat: repeat-x;
+                background-position:0vw 100%;
+                animation-duration: calc(3 * 3 * 3 * 3 * 3 * 3 * 16.18s);
+            }
+            &:nth-of-type(3) {
+                background: url('../assets/background/3.png');
+                background-size:100% auto;
+                background-attachment: fixed;
+                background-repeat: repeat-x;
+                background-position:0vw 100%;
+                animation-duration: calc(3 * 3 * 3 * 3 * 3 * 16.18s);
+            }
+            &:nth-of-type(4) {
+                background: url('../assets/background/2.png');
+                background-size:100% auto;
+                background-attachment: fixed;
+                background-repeat: repeat-x;
+                background-position:0vw 100%;
+                animation-duration: calc(3 * 3 * 3 * 3 * 16.18s);
+            }
+            &:nth-of-type(5) {
+                background: url('../assets/background/1.png');
+                background-size:100% auto;
+                background-attachment: fixed;
+                background-repeat: repeat-x;
+                background-position:0vw 100%;
+                animation-duration: calc(3 * 3 * 3 * 16.18s);
+            }
+            &:nth-of-type(6) {
+                background: url('../assets/background/0.png');
+                background-size:100% auto;
+                background-attachment: fixed;
+                background-repeat: repeat-x;
+                background-position:0vw 100%;
+                animation-duration: calc(3 * 3 * 16.18s);
+            }
+            @keyframes parallaxScroll {
+                100% {
+                    background-position:-100vw 100%;
+                }
+            }
+        }
+    }
     section.content {
         pointer-events: none;
         grid-area:content;
