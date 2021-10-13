@@ -6,4 +6,11 @@ import { Injectable } from '@angular/core';
 export class ParserService {
 
   constructor() { }
+
+  async parseSingleURIForBaseURI(): Promise<string> {
+    return await '';
+  }
+  async parseCollectionMetadata(): Promise<string> {
+    return await '';
+  }
 }

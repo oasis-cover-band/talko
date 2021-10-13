@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import Web3 from 'web3';
 import { ParserService } from './parser.service';
+import { HttpService } from './http.service';
 declare const window: any;
 const GenericNFTABI = require('../assets/abi/GenericNFTABI.json');
 // import contract abi here // most NFT contracts will use ERC-721 or I belive 1151 standard so it will all have the function to pull JSON for the collection
@@ -43,7 +44,8 @@ export class Web3Service {
 
   // ****************  END OF VARIABLES  *********************** //
   constructor(
-    private parserService: ParserService
+    private parserService: ParserService,
+    private httpService: HttpService
   ) {
     this.initializeWeb3();
   }
@@ -226,10 +228,13 @@ export class Web3Service {
       await this.useCorrectMaximumSupply().then(async correctMaximumSupply => {
         const temporaryArray: any[] = await [];
         temporaryArray.length = await correctMaximumSupply;
-  
         await temporaryArray.forEach(async (emptyItemInArray: any, index: number) => {
-  
+          console.dir(this.httpService.getSingleMetadata(index));
+          temporaryArray[index] = this.httpService.getSingleMetadata(index);
+          // STORE IN TEMPORARY ARRAY AFTER
         });
+        // SHOOT OUT ARRAY TO PARSE TO GET ATTRIBUTE DATA
+        await this.parserService.parseCollectionMetadata(this.contractAddress, await temporaryArray);
       });
     })
   }

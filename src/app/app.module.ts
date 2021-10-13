@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 import { FileSaverModule } from 'ngx-filesaver';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -15,6 +16,8 @@ import { UserInfoModule } from './user-info/user-info.module';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    FileSaverModule,
     BrowserAnimationsModule,
     AppRoutingModule,
     SearchBarModule,
