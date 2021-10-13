@@ -10,6 +10,9 @@ import { AttributeItemComponent } from './attribute-item.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    AttributeItemComponent
   ]
 })
 export class AttributeItemModule { }

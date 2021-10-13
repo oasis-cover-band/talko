@@ -10,6 +10,9 @@ import { LandingPageComponent } from './landing-page.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    LandingPageComponent
   ]
 })
 export class LandingPageModule { }

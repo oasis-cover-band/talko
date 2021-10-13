@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewSingleNftPageComponent } from './view-single-nft-page.component';
+import { NftItemModule } from '../nft-item/nft-item.module';
 
 
 
@@ -9,7 +10,11 @@ import { ViewSingleNftPageComponent } from './view-single-nft-page.component';
     ViewSingleNftPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    NftItemModule
+  ],
+  exports: [
+    ViewSingleNftPageComponent
   ]
 })
 export class ViewSingleNftPageModule { }

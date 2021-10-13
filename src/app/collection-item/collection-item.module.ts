@@ -10,6 +10,9 @@ import { CollectionItemComponent } from './collection-item.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    CollectionItemComponent
   ]
 })
 export class CollectionItemModule { }

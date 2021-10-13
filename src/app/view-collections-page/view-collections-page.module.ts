@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ViewCollectionsPageComponent } from './view-collections-page.component';
+import { CollectionItemModule } from '../collection-item/collection-item.module';
 
 
 
@@ -9,7 +10,11 @@ import { ViewCollectionsPageComponent } from './view-collections-page.component'
     ViewCollectionsPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    CollectionItemModule
+  ],
+  exports: [
+    ViewCollectionsPageComponent
   ]
 })
 export class ViewCollectionsPageModule { }

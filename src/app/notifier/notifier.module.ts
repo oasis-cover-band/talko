@@ -1,18 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NftItemComponent } from './nft-item.component';
+import { NotifierComponent } from './notifier.component';
 
 
 
 @NgModule({
   declarations: [
-    NftItemComponent
+    NotifierComponent
   ],
   imports: [
     CommonModule
-  ],
-  exports: [
-    NftItemComponent
   ]
 })
-export class NftItemModule { }
+export class NotifierModule { }
