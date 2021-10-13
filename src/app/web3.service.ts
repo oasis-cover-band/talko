@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import Web3 from 'web3';
+import { ParserService } from './parser.service';
 declare const window: any;
 const GenericNFTABI = require('../assets/abi/GenericNFTABI.json');
 // import contract abi here // most NFT contracts will use ERC-721 or I belive 1151 standard so it will all have the function to pull JSON for the collection
@@ -15,16 +16,20 @@ export class Web3Service {
   web3!: Web3; // WEB3 INSTANCE (UNDEFINED)
 
   // **************** CONTRACT VARIABLES *********************** //
-  contractAddress = '0x099689220846644f87d1137665cded7bf3422747' // ROBOTOS CONTRACT ADDRESS (FOR TESTING)
+  // contractAddress = '0x099689220846644f87d1137665cded7bf3422747' // ROBOTOS CONTRACT ADDRESS (FOR TESTING)
+  // contractAddress = '0x9A534628B4062E123cE7Ee2222ec20B86e16Ca8F' // MEKAVERSE CONTRACT ADDRESS (FOR TESTING)
+  contractAddress = '0xF43Aaa80a8F9dE69bc71aeA989AfCeB8DB7b690F' // SOCCERDOGS CONTRACT ADDRESS (FOR TESTING)
   contract!: any; // EMPTY CONTRACT OBJECT (INITIALIZED WITH ADDRESS, ONCE USER IS CONNECTED)
+  contractOwner: BehaviorSubject<any> = new BehaviorSubject(undefined); // (WHICH ADDRESS OWNS THE CURRENT CONTRACT)?
   // ****************   USER VARIABLES   *********************** //
   userAddress: BehaviorSubject<string> = new BehaviorSubject<string>(''); // (WHAT IS THIS USER'S ADDRESS?) - VALUE IS 0 IF USER ADDRESS IS UNSET
   approvedAddress: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false); // (IS THIS ADDRESS ALLOWED TO USE THE APP?) - VALUE IS 0. WILL PULL FROM SMART CONTRACT. CURRENTLY PULLS FROM JSON FILE LOCALLY.
   userETHBalance: BehaviorSubject<number> = new BehaviorSubject<number>(0); // (WHAT IS THIS USER'S ETH BALANCE?)
   chainId: BehaviorSubject<any> = new BehaviorSubject(0); // (WHICH BLOCKCHAIN IS THIS USER ON?)
-  // ****************   TEMP VARIABLES   *********************** //
-  pulledNFTAssetFromContract: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
+  // ****************   NFT VARIABLES    *********************** //
+  pulledassetFromContract: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   pulledtokenURIFromContract: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
+  pulleduriFromContract: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   // ****************  BASEURI VARIABLES *********************** //
   pulled_baseTokenURIFromContract: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
   pulledbaseTokenURIFromContract: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
@@ -37,7 +42,9 @@ export class Web3Service {
   pulledMAX_SUPPLYFromContract: BehaviorSubject<any> = new BehaviorSubject<any>(undefined);
 
   // ****************  END OF VARIABLES  *********************** //
-  constructor() {
+  constructor(
+    private parserService: ParserService
+  ) {
     this.initializeWeb3();
   }
 
@@ -167,7 +174,7 @@ export class Web3Service {
 
   async pullassetsFromContract(nftID: number): Promise<any> {
     await this.contract.methods.assets(nftID).call().then((pulledassets: any) => {
-      this.pulledNFTAssetFromContract.next(pulledassets);
+      this.pulledassetFromContract.next(pulledassets);
     }).catch({});
   }
 
@@ -176,11 +183,68 @@ export class Web3Service {
       this.pulledtokenURIFromContract.next(pulledtokenURI);
     }).catch({});
   }
+  // ************************
+  // ************************
+  // ************************
+  // USING SOCCER DOGS TEMPORARILY AS A MODEL
+  // THIS IS PROBABLY UNNEEDED BECAUSE WITH THE BASE URL AND THE AMOUNT OF ITEMS
+  // IN THE COLLECTION - WE CAN ITERATE THE ENTIRE COLLECTION WITHOUT PULLING
+  // EACH TOKEN URI SEPERATELY FROM THE CONTRACT - DUH
+  // ************************
+  // ************************
+  // ************************
+  async pulluriFromContract(nftID: number): Promise<any> {
+    await this.contract.methods.uri(nftID).call().then((pulleduri: any) => {
+      this.pulleduriFromContract.next(pulleduri);
+    }).catch({});
+  }
 
   async pullTokenJSONDataFromtokenURI(tokenURI: string): Promise<any> {
     //// call API service to get the JSON data?
     //// send returned data to parser?
   }
 
+  async pullTokenJSONDataFromuri(tokenURI: string): Promise<any> {
+    //// call API service to get the JSON data?
+    //// send returned data to parser?
+  }
 
+  // ************************
+  // ************************
+  // ************************
+  // USING SOCCER DOGS TEMPORARILY AS A MODEL
+  // THIS BELOW METHOD WILL BE GOOD TO USE IF
+  // A CONTRACT ONLY GIVES A TOKEN URI AND NOT
+  // A BASE URI THEREFORE I WOULD HAVE TO SUBSTRING THE FIRST GIVEN TOKEN URI
+  // AND THEN ITERATE IT =)
+  // ************************
+  // ************************
+  // ************************
+
+  async iteratePullThenParseCollectionBySingleURI(givenTokenURI: string): Promise<any> {
+    await this.parserService.parseSingleURIForBaseURI().then(async (baseURI:string) => {
+      await this.useCorrectMaximumSupply().then(async correctMaximumSupply => {
+        const temporaryArray: any[] = await [];
+        temporaryArray.length = await correctMaximumSupply;
+  
+        await temporaryArray.forEach(async (emptyItemInArray: any, index: number) => {
+  
+        });
+      });
+    })
+  }
+  
+  // ************************
+  // ************************
+  // ************************
+  // THESE FUNCTIONS FIGURE OUT
+  // WHICH FUNCTIONS THE CONTRACT
+  // HAS AVAILABLE PUBLICALLY
+  // ************************
+  // ************************
+  // ************************
+
+  async useCorrectMaximumSupply(): Promise<any> {
+
+  }
 }
