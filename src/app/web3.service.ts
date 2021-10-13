@@ -9,7 +9,10 @@ export class Web3Service {
   constructor() { }
 
 
-  async pullContractViaAddressWEB3Input(address: string): Promise <any> {
+  async pullContractAddressFromInputWithWEB3(address: string): Promise <any> {
+
+  }
+  async pullContractFromContractAddress(address: string): Promise <any> {
 
   }
 
@@ -22,7 +25,7 @@ export class Web3Service {
   }
 
   async parseIPFSJSONData(JSONData: any): Promise<any> {
-    
+
   }
 
 
