@@ -248,7 +248,7 @@ export class Web3Service {
       console.dir(baseURI);
       await this.useCorrectMaximumSupply().then(async correctMaximumSupply => {
         const temporaryArray: any[] = await [];
-        let lastSubscription!: Subscription | undefined = await undefined;
+        let lastSubscription: Subscription | undefined = await undefined;
         temporaryArray.length = await correctMaximumSupply;
         await temporaryArray.forEach(async (emptyItemInArray: any, index: number) => {
           lastSubscription = await this.httpService.getSingleMetadata(await index)?.subscribe(async returnedMetadata => {
