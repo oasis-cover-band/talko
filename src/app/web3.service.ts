@@ -21,7 +21,9 @@ export class Web3Service {
   userAddress: BehaviorSubject<string | 0> = new BehaviorSubject<string | 0>(0); // (WHAT IS THIS USER'S ADDRESS?) - VALUE IS 0 IF USER ADDRESS IS UNSET
   chainId: BehaviorSubject<any> = new BehaviorSubject(0); // (WHICH BLOCKCHAIN IS THIS USER ON?)
   // ****************  END OF VARIABLES  *********************** //
-  constructor() { }
+  constructor() {
+    this.initializeWeb3();
+  }
 
   async initializeWeb3() {
     this.web3 = new Web3(Web3.givenProvider);
