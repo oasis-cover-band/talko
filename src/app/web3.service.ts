@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import Web3 from 'web3';
 import { ParserService } from './parser.service';
 import { HttpService } from './http.service';
@@ -79,8 +79,28 @@ export class Web3Service {
     }
   }
 
+  async searchForNewCollection(): Promise<any> {
+    this.getContract().then(async contract => {
+      await this.searchForSoccerDoge();
+    })
+  }
+  // TEMPORARY METHOD
+  async searchForSoccerDoge(): Promise<any> {
+    const idToPull = 6; // test
+    this.pulluriFromContract(idToPull).then(
+      async uri => {
+      await this.iteratePullThenParseCollectionBySingleURI(
+        await this.pulleduriFromContract.getValue()
+        ).then(
+          async afterPulledAndParsed => {
+            // here just waiting for console log
+          }
+        )
+    })
+  }
+
   async getContract(): Promise<any> {
-    this.contract = new this.web3.eth.Contract(GenericNFTABI, this.contractAddress);
+    this.contract = await new this.web3.eth.Contract(GenericNFTABI, this.contractAddress);
   }
 
   async requestAccount(): Promise<any> {
@@ -224,13 +244,17 @@ export class Web3Service {
   // ************************
 
   async iteratePullThenParseCollectionBySingleURI(givenTokenURI: string): Promise<any> {
-    await this.parserService.parseSingleURIForBaseURI().then(async (baseURI:string) => {
+    await this.parserService.parseSingleURIForBaseURI(givenTokenURI).then(async (baseURI:string) => {
+      console.dir(baseURI);
       await this.useCorrectMaximumSupply().then(async correctMaximumSupply => {
         const temporaryArray: any[] = await [];
+        let lastSubscription!: Subscription | undefined = await undefined;
         temporaryArray.length = await correctMaximumSupply;
         await temporaryArray.forEach(async (emptyItemInArray: any, index: number) => {
-          console.dir(this.httpService.getSingleMetadata(index));
-          temporaryArray[index] = this.httpService.getSingleMetadata(index);
+          lastSubscription = await this.httpService.getSingleMetadata(await index)?.subscribe(async returnedMetadata => {
+            console.dir(await returnedMetadata);
+            temporaryArray[await index] = await returnedMetadata;
+          });
           // STORE IN TEMPORARY ARRAY AFTER
         });
         // SHOOT OUT ARRAY TO PARSE TO GET ATTRIBUTE DATA
